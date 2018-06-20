@@ -427,6 +427,21 @@ export default types
         setTimeout(() => {
           self.startAllInCurrentGroup();
         }, 250);
+      },
+      addCustomLabel: flow(function*(projectId){
+        const project = self.projects.find(({ id }) => id === projectId);
+        if (project === undefined) return;
+        const { value: name } = yield prompt('Add Custom Label', undefined, {
+          inputValue: ""
+        });
+        if (name) {
+          project.addCustomLabel(name);
+        }        
+      }),
+      
+      removeCustomLabel: (projectId, label) => {
+        const project = self.projects.find(({ id }) => id === projectId)
+        project.removeCustomLabel(label);
       }
     };
   })

@@ -27,7 +27,7 @@ export const exportStore = store => {
   return {
     settings: store.settings,
     projects: store.projects.map(project =>
-      pick(project, ['name', 'path', 'id', 'group', 'isWebBased', 'webUrl'])
+      pick(project, ['name', 'path', 'id', 'group', 'isWebBased', 'webUrl', 'customLabels']) 
     ),
     groups: store.groups.map(groups => pick(groups, ['name', 'id']))
   };

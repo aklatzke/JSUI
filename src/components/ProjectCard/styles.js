@@ -42,6 +42,16 @@ export const Icon = emotion(FontAwesomeIcon)(
   })
 );
 
+export const InlineIcon = emotion(FontAwesomeIcon)(
+  {
+    ...size(12),
+    custor: 'pointer'
+  },
+  ({color}) => ({
+    color: color || 'white'
+  })
+)
+
 export const Name = emotion.div({
   marginBottom: 10,
   cursor: 'pointer',

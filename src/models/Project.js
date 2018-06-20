@@ -60,6 +60,7 @@ export default types
     ready: true,
     editingScript: types.optional(types.string, ''),
     addingScript: createModel(Boolean),
+    customLabels: types.optional(types.array(types.string), []),
     //frozen
     packageJson: types.frozen,
     gitConfig: types.frozen,
@@ -383,6 +384,13 @@ export default types
         } else {
           self.readProjectInfo();
         }
+      },
+      addCustomLabel: (label) => {
+        self.customLabels.push(label);
+      },
+      removeCustomLabel: (label) => {
+          let idx = self.customLabels.indexOf(label);
+          self.customLabels.splice(idx, 1);
       }
     };
   })

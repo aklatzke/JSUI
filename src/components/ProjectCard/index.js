@@ -16,6 +16,8 @@ import {
   faPlay,
   faEdit,
   faCode,
+  faPlus,
+  faTimes,
   faEye,
   faGlobe,
   faTrash,
@@ -43,15 +45,26 @@ class Project extends Component {
   render() {
     const { project, store, showMove, horizontal } = this.props;
     const { settings } = store;
-    const { type, ready, isWebBased } = project;
-    const hasProjectType = type && type !== PROJECT_TAGS.UNKNOWN;
+    const { type, ready, isWebBased, customLabels } = project;
+    const labels = [ ...customLabels ];
+    const hasProjectType = (type && type !== PROJECT_TAGS.UNKNOWN) ;
     const markRed = settings.highlightProjectsWithoutRepo && !project.origin && !isWebBased;
 
     return (
       <S.ProjectCard horizontal={horizontal} markRed={markRed}>
         <Vertical>
           <S.Name onClick={this.onClick}>{project.name}</S.Name>
-          <Horizontal spaceAll={5}>{hasProjectType && <S.Tag> {project.type} </S.Tag>}</Horizontal>
+          <Horizontal spaceAll={5}>
+            { 
+              labels.length ? 
+              labels.map(item => (
+                <S.Tag>{item} <S.InlineIcon tip='Remove Label' icon={faTimes} onClick={() => store.removeCustomLabel(project.id, item)}></S.InlineIcon> </S.Tag>
+                ) ) : 
+                '' 
+            }
+            {hasProjectType && <S.Tag> {project.type}</S.Tag>} 
+            <A.ActionIcon tip='Add Label' icon={faPlus} onClick={() => store.addCustomLabel(project.id)}></A.ActionIcon>
+          </Horizontal>
         </Vertical>
 
         <Horizontal css={{ marginTop: 10 }} spaceAll={15}>
