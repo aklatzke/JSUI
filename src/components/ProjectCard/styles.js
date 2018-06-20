@@ -45,7 +45,7 @@ export const Icon = emotion(FontAwesomeIcon)(
 export const InlineIcon = emotion(FontAwesomeIcon)(
   {
     ...size(12),
-    custor: 'pointer'
+    cursor: 'pointer'
   },
   ({color}) => ({
     color: color || 'white'
